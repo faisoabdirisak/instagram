@@ -5,11 +5,18 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateUserForm, UpdateProfileForm
 from .forms import RegisterForm, LoginForm
+from .models import Comment, Photo
 
 
 # Create your views here.
 def home(request):
-    return render(request, 'auth/home.html')
+    photos = Photo.objects.all()
+    comments= Comment.objects.all()
+    context ={'comments':comments, 'photos': photos}
+    return render(request, 'auth/home.html',context)
+
+
+
 
 class RegisterView(View):
     form_class = RegisterForm
