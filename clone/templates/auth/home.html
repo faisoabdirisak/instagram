@@ -1,9 +1,6 @@
 {% extends "auth/base.html" %}
 {% block title %} Home Page {% endblock title%}
 {% block content %}
-  
-
-
 
 {% for photo in photos %}
 <div class="tab-content">
@@ -15,9 +12,8 @@
                        <div class="col-1 float-left"><img src="{{ user.profile.avatar.url }}" class="rounded-circle z-depth-0" style="width: 50px; height: 50px;"></div> 
                         <div class="col-3 float-left ml-3" ><h3>{{user.username}}</h3></div>
                         <div class="col-4 float-left"><h3></h3></div>
-                        <div class="col-3 float-right text-right"><a href="{% url 'photo' photo.id %}">Go to Post</a></div>
                     </div>
-                    <img class="card-img" src="{{photo.image.url}}" alt="Card image cap" >
+                    <a href="{% url 'photo' photo.id %}"><img class="card-img" src="{{photo.image.url}}" alt="Card image cap" ></a>
                     <div class="card-body px-3">
                         <h5 class="card-title"></h5>
                         

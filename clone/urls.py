@@ -16,4 +16,5 @@ urlpatterns = [
                                            authentication_form=LoginForm), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'), 
     path('profile/', views.profile, name='users-profile'),
+    path('search/', views.search_results, name='search_results'),
 ]

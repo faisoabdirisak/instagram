@@ -107,3 +107,18 @@ def profile(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'auth/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+
+
+def search_results(request):
+    if 'photo' in request.GET and request.GET["photo"]:
+        search_term = request.GET.get("photo")
+        searched_profiles = profile.search_profile(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"photos": searched_profiles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'auth/search.html',{"message":message})
