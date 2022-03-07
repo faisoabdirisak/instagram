@@ -20,4 +20,14 @@ class Comment(models.Model):
 
   
 
+class Photo (models.Model):
+    comments = models.ForeignKey(Comment, on_delete=models.SET_NULL,null=True, blank=True)
+    image=models.ImageField(null=False,blank=False,)
+    description= models.TextField(max_length=500, null=False, blank=False)
+    pub_date = models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.description  
+
+
         
