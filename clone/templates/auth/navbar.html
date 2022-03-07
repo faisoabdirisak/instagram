@@ -1,0 +1,69 @@
+{% load static %}
+  <nav class="navbar navbar-light bg-white border-bottom py-1">
+      <div class="container">
+          <a class="navbar-brand" href="/">
+              <img src="{% static 'images/instalogo.png' %}" class="nav__insta__logo">
+          </a>
+        <div class="search__input m-auto d-none d-md-block">
+
+          <!-- Form to search Users -->
+          <form method="GET" action="" class="form-inline">
+            <input type="text" autocapitalize="none" placeholder="Search User" value="" class="form-control" name="query">
+            <button type="submit" class=" ml-2 btn p-1">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+          <!-- Form to search Users End -->
+
+        </div>    
+        <ul class="navbar-nav ml-0 ml-md-auto d-flex flex-row">
+
+          <!-- Home Button -->
+          <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+            <a href="{% url 'users-home' %}" class="text-decoration-none text-reset"><span class="nav__icons fa fa-home"></span></a>
+          </li>
+
+            <!-- Explore View Button -->
+            <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                <a href="" class="text-decoration-none text-reset"><span class="nav__icons far fa-compass"></span></a>
+            </li>
+
+            <!-- Liked Posts Button -->
+            <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                <a href="" class="text-decoration-none text-reset"><span class="nav__icons far fa-heart"></span></a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <!-- profile link -->
+            <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+              <a href="{% url 'users-profile' %}" class="text-decoration-none text-reset">Profile</span></a>
+          </li>
+             <!-- Liked logout Button -->
+             <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+              <a href="{% url 'logout' %}" class="text-decoration-none text-reset">Logout</span></a>
+          </li>
+          {% else %}
+             <!-- Liked login Button -->
+             <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+              <a href="{% url 'login' %}" class="text-decoration-none text-reset">Login</span></a>
+          </li>
+          {% endif %}
+
+
+        </ul>
+      </div>
+      
+      </div>
+  </nav>
+
+  {% if messages %}
+  <div class="alert alert-dismissible" role="alert">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
