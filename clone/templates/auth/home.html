@@ -29,5 +29,16 @@
                         <div class="col-4 float-left text-left"><input type="text" autocapitalize="none" placeholder="add comment" value="" class="form-control" name="query"></div>
                         <div class="col-5 float-left text-left"><i class=""></i></i></div>
                         <div class="col-1 float-right text-right"><i class="mr-3 fa fa-bookmark" ></i></div>
-                    
+                    </div>  
+                    <div class="col-2 float-left text-right post-number"><h4 style="font-size: 10px;">{{photo.pub_date|timesince}}</h4></div>
+                    <div class="col-3 float-left text-right post-number"><h4>{{comment.name}}</h4></div>          
+                </div>
+              
+            </div>     
+</div>
+</div>
+</div>
+{%endfor%}
+<button type="button" class="btn btn-primary btn-md btn-success"data-toggle="modal" data-target="#exampleModal"><a href=""> a new post</a></button>
+
 {% endblock content %}
