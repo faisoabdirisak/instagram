@@ -15,7 +15,7 @@
                        <div class="col-1 float-left"><img src="{{photo.image.url}}" class="rounded-circle z-depth-0" style="width: 50px; height: 50px;"></div> 
                         <div class="col-3 float-left" ><h3>My first post</h3></div>
                         <div class="col-5 float-left"><h3></h3></div>
-                        <div class="col-3 float-right text-right"><a href="">Go to Post</a></div>
+                        <div class="col-3 float-right text-right"><a href="{% url 'photo' photo.id %}">Go to Post</a></div>
                     </div>
                     <img class="card-img" src="{{photo.image.url}}" alt="Card image cap" >
                     <div class="card-body px-3">
@@ -39,6 +39,7 @@
 </div>
 </div>
 {%endfor%}
-<button type="button" class="btn btn-primary btn-md btn-success"data-toggle="modal" data-target="#exampleModal"><a href=""> a new post</a></button>
+<button type="button" class="btn btn-primary btn-md btn-success"data-toggle="modal" data-target="#exampleModal"><a href="{% url 'add' %}"> a new post</a></button>
+
 
 {% endblock content %}
