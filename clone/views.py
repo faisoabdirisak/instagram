@@ -22,6 +22,23 @@ def viewPhoto(request,pk):
     return render(request, 'auth/viewphoto.html', {'photo': photo})
 
 
+def addPhoto(request):
+
+    if request.method == 'POST':
+        data = request.POST
+        image = request.FILES.get('image')
+      
+
+        photo = Photo.objects.create(
+                description=data['description'],
+                image=image,
+            )
+
+        return redirect('home')
+    context ={}
+    return render(request, 'auth/addpost.html', context)
+
+
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
