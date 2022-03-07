@@ -3,7 +3,14 @@
 {% block content %}
 <div class="container">
     <div class="row justify-cotent-center">
-        
+        <div class="col-md-9">
+            <a href="{% url 'home' %}" class="btn btn-info my-3">Go Back</a>
+            <div style="height: 60vh;">
+            <img style="max-height:100%;" src="{{photo.image.url}}">
+            <p>{{ photo.description}}</p>
+        </div>
+            
+        </div>
     </div>
 </div>
 
