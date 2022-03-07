@@ -9,6 +9,8 @@ from .views import profile
 
 urlpatterns = [
     path('', views.home, name='users-home'),
+    	
+	path('add/', views.addPhoto, name='add'),
     path('register/', views.RegisterView.as_view(), name='users-register'),
     path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='auth/login.html',
                                            authentication_form=LoginForm), name='login'),
