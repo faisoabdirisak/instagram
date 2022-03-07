@@ -15,6 +15,13 @@ def home(request):
     context ={'comments':comments, 'photos': photos}
     return render(request, 'auth/home.html',context)
 
+
+
+def viewPhoto(request,pk):
+    photo = Photo.objects.get(id=pk)
+    return render(request, 'auth/viewphoto.html', {'photo': photo})
+
+
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
