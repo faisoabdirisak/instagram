@@ -12,8 +12,8 @@
             <div class="">
                 <div class="card mx-auto custom-card" id="prova" style="width: 600px;">
                     <div class="row post-header col-12 py-2 px-3">
-                       <div class="col-1 float-left"><img src="{{photo.image.url}}" class="rounded-circle z-depth-0" style="width: 50px; height: 50px;"></div> 
-                        <div class="col-3 float-left" ><h3>My first post</h3></div>
+                       <div class="col-1 float-left"><img src="{{ user.profile.avatar.url }}" class="rounded-circle z-depth-0" style="width: 50px; height: 50px;"></div> 
+                        <div class="col-3 float-left" ><h3>{{user.username}}</h3></div>
                         <div class="col-5 float-left"><h3></h3></div>
                         <div class="col-3 float-right text-right"><a href="{% url 'photo' photo.id %}">Go to Post</a></div>
                     </div>

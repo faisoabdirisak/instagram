@@ -2,7 +2,7 @@
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
     <div class="row my-3 p-3">
-        <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer; height: 60px;width: 60px;;"/>
+        <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " class="rounded-circle z-depth-0" style="width: 50px; height: 50px; cursor: pointer;">
     </div>
     {% if user_form.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
