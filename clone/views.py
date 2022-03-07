@@ -15,9 +15,6 @@ def home(request):
     context ={'comments':comments, 'photos': photos}
     return render(request, 'auth/home.html',context)
 
-
-
-
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
