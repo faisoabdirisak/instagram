@@ -64,7 +64,7 @@ def addPhoto(request):
                 image=image,
             )
 
-        return redirect('home')
+        return redirect('users-home')
     context ={}
     return render(request, 'auth/addpost.html', context)
 
