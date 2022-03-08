@@ -1,37 +1,27 @@
 # instagram
-## Author  
+## Author
   
-[Github](https://github.com/faisoabdirisak) 
+[Github](https://github.com/faisoabdirisak)
   
-# Description  
-This is a Django application for photo gallery that allows a user to upload images for other to see and be able to to share by coping the image link.
+# Description
+This is a Django application instagram clonethat allows a user to post images for other to see,like and comment the post.
   
 ##  Live Link  
- Click [View Site]()  to visit the site.
+ Click [View Site](https://boiling-sierra-41687.herokuapp.com/)  to visit the site.
   
 ## Screenshots 
-###### Home page
- 
-<img src="https://github.com/faisoabdirisak/Gallary_photo/blob/master/static/images/Screenshot%20from%202022-02-28%2008-22-00.png">
- 
+<img src="https://github.com/faisoabdirisak/instagram/blob/master/static/images/Screenshot%20from%202022-03-08%2020-52-29.png">
 
  
-## User Story  
-  
-* View different photos that interest them  
-* Click a single photo to expand it and view the details of that photo  
-* Search for different categories   
-* Copy a link to the photo to share with my friends.  
-* View photos based on the location they were taken.  
-  
-
+<img src="https://github.com/faisoabdirisak/instagram/blob/master/static/images/Screenshot%20from%202022-03-08%2020-52-44.png">
+ 
   
 ## Setup and Installation  
 To get the project .......  
   
 ##### Cloning the repository:  
  ``` 
-git clone https://github.com/faisoabdirisak/Gallary_photo.git
+git clone https://github.com/faisoabdirisak/instagram.git
 ```
 ##### Navigate into the folder 
  ``` 
