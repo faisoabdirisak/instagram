@@ -1,7 +1,14 @@
+from django.dispatch import receiver
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect 
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.views import View
+# from .email import send_welcome_email
+# from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateUserForm, UpdateProfileForm
 from .forms import RegisterForm, LoginForm
@@ -12,9 +19,32 @@ from .models import Comment, Photo
 def home(request):
     photos = Photo.objects.all()
     comments= Comment.objects.all()
-    context ={'comments':comments, 'photos': photos}
-    return render(request, 'auth/home.html',context)
+    form = RegisterForm(request.POST)
+    if request.method == 'POST':
+       
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            recipient = RegisterRecipients(name = name,email =email)
+            recipient.save()
+            # send_welcome_email(name,email)
+            str= 'sign up notification'
+            subject = 'Welcome to instagram clone web app'
+            sender = 'faisoabdirisak@gmail.com'
+            
 
+    #passing in the context vairables
+            text_content = render_to_string('email/newsemail.txt',{"name": name})
+            html_content = render_to_string('email/newsemail.html',{"name": name})
+
+            # msg = EmailMultiAlternatives(subject,text_content,sender,[email])
+            # msg.attach_alternative(html_content,'text/html')
+            send_mail(str,subject,sender, [receiver],fail_silently=False)
+            # msg.send()
+            HttpResponseRedirect('auth/home')
+
+    context ={'comments':comments, 'photos': photos, "form":form}
+    return render(request, 'auth/home.html',context)
 
 
 def viewPhoto(request,pk):
