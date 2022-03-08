@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config
+import django_heroku
+import dj_database_url
+from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +24,43 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&cvr$p82qmixc185q9w@&e-7xd)=02n2g+zj*-o$=c7oyh6c8%'
+# SECRET_KEY = 'django-insecure-&cvr$p82qmixc185q9w@&e-7xd)=02n2g+zj*-o$=c7oyh6c8%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['boiling-sierra-41687.herokuapp.com','127.0.0.1']
+
+
+
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+# development
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
+       
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -44,6 +77,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,15 +107,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'instagram.wsgi.application'
 
 
-# Email configurations remember to install python-decouple
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'faisoabdirisak@gmail.com'
-EMAIL_HOST_PASSWORD = 'faska12'
-EMAIL_HIST_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # Database
@@ -141,6 +171,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -155,3 +187,5 @@ MEDIA_URL = '/media/' #accessing media from browser
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
